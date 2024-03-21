@@ -1,0 +1,121 @@
+﻿<Page x:Class="DocumentoOborotWpfApp.Pages.Directories"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DocumentoOborotWpfApp.Pages"
+      mc:Ignorable="d" Background="White"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Директория">
+    <Grid>
+        <TabControl TabStripPlacement="Left">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ContentPresenter Content="{TemplateBinding Content}">
+                                    <ContentPresenter.LayoutTransform>
+                                        <RotateTransform Angle="270" />
+                                    </ContentPresenter.LayoutTransform>
+                                </ContentPresenter>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Padding" Value="3" />
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="ЭС4" Height="110" Width="30" >
+                <GroupBox Header="Внутриплощадочные сети" Margin="5" Padding="5">
+                    <StackPanel>
+                        <TextBox Text="asda"/>
+                        <TextBlock Text="asda"/>
+                        <ListView x:Name="listviewVS" 
+                          HorizontalAlignment="Stretch"  
+                          Margin="5" 
+                          VerticalAlignment="Stretch" 
+                          SelectionMode="Extended" 
+                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>    
+                   
+                </GroupBox>
+            </TabItem>
+
+            <TabItem Header="СЗП" Height="110" Width="30">
+                <GroupBox Header="Средства защиты проезда" Margin="5" Padding="5">
+                    <ListView x:Name="listviewSZP" 
+                          HorizontalAlignment="Stretch"  
+                          Margin="5" 
+                          VerticalAlignment="Stretch" 
+                          SelectionMode="Extended" 
+                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </GroupBox>
+            </TabItem>
+
+            <TabItem Header="ЭМ" Height="110" Width="30">
+                <GroupBox Header="Электрооборудование силовое" Margin="5" Padding="5">
+                    <ListView x:Name="listviewEM" 
+                          HorizontalAlignment="Stretch"  
+                          Margin="5" 
+                          VerticalAlignment="Stretch" 
+                          SelectionMode="Extended" 
+                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </GroupBox>
+            </TabItem>
+
+            <TabItem Header="ЭНО" Height="110" Width="30">
+                <GroupBox Header="Охранное освещение" Margin="5" Padding="5">
+                    <ListView x:Name="listviewENO" 
+                          HorizontalAlignment="Stretch"  
+                          Margin="5" 
+                          VerticalAlignment="Stretch" 
+                          SelectionMode="Extended" 
+                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </GroupBox>
+            </TabItem>
+
+            <TabItem Header="ТСО" Height="110" Width="30">
+                <GroupBox Header="Технические средства охраны" Margin="5" Padding="5">
+                    <ListView x:Name="listviewTSO" 
+                          HorizontalAlignment="Stretch"  
+                          Margin="5" 
+                          VerticalAlignment="Stretch" 
+                          SelectionMode="Extended" 
+                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </GroupBox>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Page>

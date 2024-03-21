@@ -115,7 +115,13 @@ namespace DocumentoOborotWpfApp.Pages
 
                         // Сохраните документ Word
                         doc.Save($"{upPath3}/Resources/act-output.docx");
-                        MessageBox.Show("Проверь");
+                        
+
+
+
+
+
+
                     }
                     catch (Exception ex)
                     {

@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,7 +68,6 @@ namespace DocumentoOborotWpfApp.Pages
                 osmotrX.Text, nameIzX.Text, nomerProektX.Text,
                 privyazkaX.Text, pasportX.Text, razmerX.Text
             };
-
             int temp = 0;
             foreach (var item in mass)
             {
@@ -76,7 +76,6 @@ namespace DocumentoOborotWpfApp.Pages
                     temp++;
                 }
             }
-
             if (temp > 0)
             {
                 MessageBox.Show("Вы пропустили поле", "Вот балбес ;D");
@@ -85,10 +84,10 @@ namespace DocumentoOborotWpfApp.Pages
             {
                 if (podpis.IsChecked == true)
                 {
-                    string Path = $"{upPath3}/Resources/act-sample.docx";
+                    string pathloc = $"{upPath3}/Resources/act-sample.docx";
 
                     // Загрузите документ Word docx
-                    Aspose.Words.Document doc = new(Path);
+                    Aspose.Words.Document doc = new(pathloc);
                     try
                     {
                         // Поиск и замена текста в документе
@@ -115,9 +114,42 @@ namespace DocumentoOborotWpfApp.Pages
 
                         // Сохраните документ Word
                         doc.Save($"{upPath3}/Resources/act-output.docx");
+
+                        // Потом сохраняю документ в БД
+                        Models.Document document = new();
+
+                        // Load the document from disk.
+                        Aspose.Words.Document doc1 = new($"{upPath3}/Resources/act-output.docx");
+
+                        // Create a new memory stream.
+                        MemoryStream outStream = new();
+                        // Save the document to stream.
+                        doc1.Save(outStream, SaveFormat.Docx);
+
+                        // Convert the document to byte form.
+                        byte[] docBytes = outStream.ToArray();
+
+                        document.DocName = System.IO.Path.GetFileName($"{upPath3}/Resources/act-output.docx");
+                        document.DocByte = docBytes;
+                        db.Documents.Add(document);
+                        db.SaveChanges();
+
+                        var getIdDoc = db.Documents.OrderBy(x => x.Id).LastOrDefault();
+                        if(getIdDoc != null)
+                        {
+                            Sending sending = new();
+                            sending.FkSendUser = idInzhener; // Отправитель
+                            sending.FkRecUser = (int?)controlsX.SelectedValue; // Получатель
+                            sending.FkDoc = getIdDoc.Id;
+                            sending.CommentSend = commentX.Text;
+                            sending.FkStatus = 1; //Активный
+                            db.Sendings.Add(sending);
+                            db.SaveChanges();
+                        }
                         
 
 
+                       
 
 
 

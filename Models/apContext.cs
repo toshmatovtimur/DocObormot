@@ -16,7 +16,6 @@ namespace DocumentoOborotWpfApp.Models
         {
         }
 
-        public virtual DbSet<Addfile> Addfiles { get; set; } = null!;
         public virtual DbSet<Dirdoc> Dirdocs { get; set; } = null!;
         public virtual DbSet<Directory> Directories { get; set; } = null!;
         public virtual DbSet<Document> Documents { get; set; } = null!;
@@ -38,19 +37,6 @@ namespace DocumentoOborotWpfApp.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum("pol", new[] { "Male", "Female", "Undefined" });
-
-            modelBuilder.Entity<Addfile>(entity =>
-            {
-                entity.ToTable("addfile");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.AddfileByte).HasColumnName("addfile_byte");
-
-                entity.Property(e => e.AddfileName)
-                    .HasMaxLength(120)
-                    .HasColumnName("addfile_name");
-            });
 
             modelBuilder.Entity<Dirdoc>(entity =>
             {
@@ -170,8 +156,6 @@ namespace DocumentoOborotWpfApp.Models
                     .HasMaxLength(400)
                     .HasColumnName("comment_send");
 
-                entity.Property(e => e.FkAddfile).HasColumnName("fk_addfile");
-
                 entity.Property(e => e.FkDoc).HasColumnName("fk_doc");
 
                 entity.Property(e => e.FkRecUser).HasColumnName("fk_rec_user");
@@ -180,10 +164,6 @@ namespace DocumentoOborotWpfApp.Models
 
                 entity.Property(e => e.FkStatus).HasColumnName("fk_status");
 
-                entity.HasOne(d => d.FkAddfileNavigation)
-                    .WithMany(p => p.Sendings)
-                    .HasForeignKey(d => d.FkAddfile)
-                    .HasConstraintName("sending_fk_addfile_fkey");
 
                 entity.HasOne(d => d.FkDocNavigation)
                     .WithMany(p => p.Sendings)

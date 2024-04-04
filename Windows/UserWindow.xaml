@@ -29,20 +29,20 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--<DocumentViewer Grid.ColumnSpan="3"
+        <DocumentViewer Grid.ColumnSpan="3"
                         Grid.RowSpan="10"
                         Margin="10"
                         Background="White"
-                        Name="documentViewer1"/>-->
+                        Name="documentViewer1"/>
 
-        <!--<Button Content="Open" 
+        <Button Content="Open" 
                 Background="LightGreen"
                 Click="Button_Click"
                 Height="25"
                 Width="100"
                 Grid.Column="2"
                 VerticalAlignment="Top" 
-                Margin="93,12,93,0"/>-->
+                Margin="56,10,69,0"/>
 
         <!-- Страницы -->
         <Frame Name="MainFrame" Padding="5" 

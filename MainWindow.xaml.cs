@@ -20,10 +20,10 @@ namespace DocumentoOborotWpfApp
         public MainWindow()
         {
             InitializeComponent();
-            Start();
-            UserWindow table = new(6);
-            table.Show();
+            AdminWindow admin = new();
+            admin.Show();
             Close();
+            Start();
         }
 
         //Войти
@@ -118,6 +118,7 @@ namespace DocumentoOborotWpfApp
             var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
             return Convert.ToBase64String(hash);
         }
+
         //Метод хорошего старта
         private void Start()
         {

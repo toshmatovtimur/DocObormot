@@ -146,13 +146,8 @@ namespace DocumentoOborotWpfApp.Pages
                             db.Sendings.Add(sending);
                             db.SaveChanges();
                         }
-                        
 
-
-                       
-
-
-
+                        MessageBox.Show("Документ отправлен на проверку!", "Успешно!");
 
                     }
                     catch (Exception ex)

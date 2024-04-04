@@ -30,8 +30,7 @@ namespace DocumentoOborotWpfApp.Windows
         {
             InitializeComponent();
             StartTimeNow();
-            //MainFrame.Content = new Pages.Controls(idUser);
-            MainFrame.Content = new Pages.Controls(6);
+            MainFrame.Content = new Pages.Controls(idUser);
         }
         
 
@@ -48,7 +47,7 @@ namespace DocumentoOborotWpfApp.Windows
             {
                 dlg.DefaultExt = ".xps";
                 XpsDocument doc = new(ConvertWordInXps(dlg.FileName), FileAccess.Read);
-                //documentViewer1.Document = doc.GetFixedDocumentSequence();
+                documentViewer1.Document = doc.GetFixedDocumentSequence();
 
             }
         }

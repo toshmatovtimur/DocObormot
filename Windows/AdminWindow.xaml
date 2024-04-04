@@ -3,13 +3,93 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DocumentoOborotWpfApp"
-        mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="Админ"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="35" Width="256"/>
+        mc:Ignorable="d"  WindowStartupLocation="CenterScreen"
+        Icon="\Resources\1.png"
+        Title="Администрирование"
+        ResizeMode="CanMinimize"
+        Height="700"
+        Width="1300">
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dataGrid"
+                  Background="AliceBlue"
+                  RowHeight="30"
+                  HorizontalAlignment="Left"
+                  VerticalContentAlignment="Center"
+                  Grid.RowSpan="8"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  Width="745"
+                  CanUserSortColumns="True"
+                  CanUserDeleteRows="False"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
+                  CanUserAddRows="False"
+                  AllowDrop="False" 
+                  RowBackground="White" 
+                  CellEditEnding="CellUsers" Margin="0,0,66,68">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить запись" Click="DeleteUser" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Код"/>
+                <DataGridTextColumn Binding="{Binding Firstname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Фамилия"/>
+                <DataGridTextColumn Binding="{Binding Middlename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Имя"/>
+                <DataGridTextColumn Binding="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Отчество"/>
+                <DataGridTextColumn Binding="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Почта"/>
+                <DataGridTextColumn Binding="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Логин"/>
+                <DataGridTextColumn Binding="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Пароль"/>
+                <DataGridTemplateColumn CanUserSort="True" Header="Роль" SortMemberPath="Area">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding RoleCombobox, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                          SelectedValue="{Binding FkRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="RoleName"
+                                          SelectedValuePath="Id"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Content="Добавить пользователя" 
+                Background="AliceBlue" 
+                HorizontalAlignment="Center" 
+                Grid.Column="1"
+                VerticalAlignment="Center" 
+                Height="30" Width="140" 
+                Click="Button_Click"/>
+
+        <TextBox x:Name="sUserX"
+                 Background="AliceBlue" 
+                 HorizontalAlignment="Right" 
+                 Grid.Column="0"
+                 VerticalAlignment="Center" 
+                 Height="30" Width="140" KeyUp="SearchUser"/>
     </Grid>
 </Window>

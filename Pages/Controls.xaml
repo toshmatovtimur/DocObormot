@@ -204,7 +204,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Grid.Row="11" Click="Otpravka_Click"
-                Margin="90,10,0,4" Width="113" />
+                Margin="90,0,0,4" Width="113" Height="24" VerticalAlignment="Bottom" />
 
 
     </Grid>

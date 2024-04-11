@@ -34,7 +34,7 @@ namespace DocumentoOborotWpfApp.Windows
         {
             using apContext ok = new();
 
-            MyListUsers = ok.Users.ToList();
+            MyListUsers = ok.Users.OrderBy(u => u.Id).ToList();
 
             dataGrid.ItemsSource = MyListUsers;
 
@@ -137,5 +137,32 @@ namespace DocumentoOborotWpfApp.Windows
             }
 
         }
+
+        // Обновление должности (Роли)
+        private async void UpdateComboBox(object sender, EventArgs e)
+        {
+            if ((dataGrid.SelectedItem as User)?.Id == 0 || (dataGrid.SelectedItem as User)?.Id == null)
+                return;
+            else
+            {
+                try
+                {
+                    //Меняем подразделение Заявителю
+                    using apContext ok = new();
+
+                    var GetId = await ok.Roles.AsNoTracking().Where(u => u.RoleName == (sender as ComboBox).Text).FirstOrDefaultAsync();
+
+                    if (GetId != null)
+                        await ok.Database.ExecuteSqlRawAsync("UPDATE users SET fk_role = {0} WHERE Id = {1}", GetId.Id, (dataGrid.SelectedItem as User)?.Id);
+                    else
+                        MessageBox.Show("Произошла ошибка при обновлении данных");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Произошла ошибка, повторите попытку", ex.Message);
+                }
+            }
+        }
+
     }
 }

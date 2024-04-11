@@ -23,7 +23,7 @@ namespace DocumentoOborotWpfApp
             AdminWindow admin = new();
             admin.Show();
             Close();
-            Start();
+            //Start();
         }
 
         //Войти
@@ -129,6 +129,7 @@ namespace DocumentoOborotWpfApp
             }
             login_text.Focus();
         }
+
         //Методы подсвечивают рамки красным при неправильном вводе
         private void Pa(object sender, MouseEventArgs e)
         {

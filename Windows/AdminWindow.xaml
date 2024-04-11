@@ -68,9 +68,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding RoleCombobox, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                          SelectedValue="{Binding FkRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          DisplayMemberPath="RoleName"
-                                          SelectedValuePath="Id"/>
+                                      SelectedValue="{Binding FkRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="RoleName"
+                                      SelectedValuePath="Id" 
+                                      DropDownClosed="UpdateComboBox"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

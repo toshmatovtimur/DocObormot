@@ -16,6 +16,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SkiaSharp;
 using System.Security.Cryptography;
+using Aspose.Words;
+using System.IO;
+using System.Windows.Xps.Packaging;
+using System.Diagnostics;
 
 namespace DocumentoOborotWpfApp.Windows
 {
@@ -27,6 +31,7 @@ namespace DocumentoOborotWpfApp.Windows
         {
             InitializeComponent();
             StartTable();
+            StartTableSends();
         }
 
         // Заполнение таблицы
@@ -41,6 +46,32 @@ namespace DocumentoOborotWpfApp.Windows
 
             //Заполнение Comboboxes
             RoleCombobox = ok.Roles.ToList();
+        }
+
+        // Заполнение таблицы История документоборота
+        private void StartTableSends()
+        {
+            using apContext db = new();
+
+            var getmymind = from send in db.Sendings.ToList()
+                            join user1 in db.Users.ToList() on send.FkSendUser equals user1.Id
+                            join user2 in db.Users.ToList() on send.FkRecUser equals user2.Id
+                            join doc in db.Documents.ToList() on send.FkDoc equals doc.Id
+                            join status in db.Sendstatuses.ToList() on send.FkStatus equals status.Id
+                            join rol in db.Roles.ToList() on user1.FkRole equals rol.Id
+                            select new
+                            {
+                                send.Id,
+                                otpravka = $"{user1.Firstname} {user1.Middlename[1].ToString().ToUpper()}.{user1.Lastname[1].ToString().ToUpper()}. - {rol.RoleName}",
+                                poluchatel = $"{user2.Firstname} {user2.Middlename[1].ToString().ToUpper()}.{user2.Lastname[1].ToString().ToUpper()}. - {rol.RoleName}",
+                                document = doc.DocName,
+                                doc.DocByte,
+                                stat = status.SendstatusName
+                            };
+
+            listviewSends.ItemsSource = getmymind.ToList();
+
+
         }
 
         // Обновить данные пользователя
@@ -164,5 +195,73 @@ namespace DocumentoOborotWpfApp.Windows
             }
         }
 
+        // Открыть документ
+        private void OpenDocument(object sender, MouseButtonEventArgs e)
+        {
+            int t = ReturnId(listviewSends.SelectedValue.ToString());
+
+            using apContext db = new();
+
+            var getMyWord = db.Documents.Where(u => u.Id == t).FirstOrDefault();
+            if(getMyWord != null)
+            {
+                byte[]? docBytes = getMyWord.DocByte;
+                MemoryStream inStream = new(docBytes);
+
+                // Load the stream into a new document object.
+                Aspose.Words.Document loadDoc = new(inStream);
+
+                // Save the document.
+                var path = System.IO.Directory.GetCurrentDirectory();
+                var upPat1 = System.IO.Directory.GetParent(path).FullName;
+                var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
+                var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
+
+                string endPath = $"{upPath3}/Docx/1234.docx";
+
+                loadDoc.Save(endPath, SaveFormat.Docx);
+
+                XpsDocument doc = new(ConvertWordInXps(endPath), FileAccess.Read);
+                documentViewer1.Document = doc.GetFixedDocumentSequence();
+            }
+
+            // Конвертация из Word в Xps
+            static string ConvertWordInXps(string fileName)
+            {
+                var doc = new Aspose.Words.Document(fileName);
+
+                var path = System.IO.Directory.GetCurrentDirectory();
+                var upPat1 = System.IO.Directory.GetParent(path).FullName;
+                var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
+                var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
+
+                string endPath = $"{upPath3}/Docx/1234.xps";
+
+                doc.Save(endPath);
+
+                return endPath;
+
+
+            }
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if(str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+
+        }
     }
 }

@@ -97,6 +97,7 @@ namespace DocumentoOborotWpfApp.Windows
 
                 // Create a new memory stream.
                 MemoryStream outStream = new();
+
                 // Save the document to stream.
                 doc.Save(outStream, SaveFormat.Docx);
 
@@ -110,29 +111,15 @@ namespace DocumentoOborotWpfApp.Windows
 
             }
 
-
             MessageBox.Show("Проверь БД");
 
-
         }
-
 
         // Обратно из БД в Word файл
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             using apContext db = new();
             OpenFileDialog open = new();
-
-            #region Открытие файла word
-            //var proc = new System.Diagnostics.Process();
-            //proc.StartInfo.FileName = @"C:\Users\toshm\OneDrive\Рабочий стол\Общий_план_работы_на_весь_семестр.doc";
-            //proc.StartInfo.UseShellExecute = true;
-            //proc.Start();
-            #endregion
-
-            // The bytes are now ready to be stored/transmitted.
-            // Now reverse the steps to load the bytes back into a document object.
-
 
             var getMyWord = db.Documents.FirstOrDefault();
 

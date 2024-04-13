@@ -43,8 +43,14 @@
                   Margin="5" 
                   VerticalAlignment="Stretch" 
                   SelectionMode="Extended" 
-                  IsSynchronizedWithCurrentItem="True">
+                  IsSynchronizedWithCurrentItem="True" MouseLeftButtonUp="Zametki">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Просмотреть документ" Click="ViewDocumentAnswer"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View>
+                
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=otpravka, Mode=OneWay}" Header="Отправитель" Width="155"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=poluchatel, Mode=OneWay}" Header="Получатель" Width="155"/>
@@ -60,6 +66,7 @@
                    FontSize="25"
                    HorizontalAlignment="Left" Margin="20,0,0,0"/>
         <TextBox TextWrapping="Wrap"
+                 x:Name="zametkaX"
                  Width="450"
                  Height="180"
                  Grid.Row="5"

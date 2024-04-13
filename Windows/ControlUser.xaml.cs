@@ -26,11 +26,13 @@ namespace DocumentoOborotWpfApp.Windows
     /// </summary>
     public partial class ControlUser : Window
     {
+        int idControl = 0;
         public ControlUser(int idUser)
         {
             InitializeComponent();
             StartTimeNow();
             MainFrame.Content = new Pages.Controls(idUser);
+            idControl = idUser;
 
         }
         #region Работа с Word
@@ -153,7 +155,7 @@ namespace DocumentoOborotWpfApp.Windows
         // Ответ
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.Answer();
+            MainFrame.Content = new Pages.Answer(idControl);
         }
         #endregion
         #region Время()

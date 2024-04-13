@@ -44,10 +44,8 @@ namespace DocumentoOborotWpfApp
                 if (string.IsNullOrWhiteSpace(login_text.Text))
                     login_text.BorderBrush = Brushes.Red;
 
-
                 if (string.IsNullOrWhiteSpace(password_text.Password))
                     password_text.BorderBrush = Brushes.Red;
-
             }
             else
             {
@@ -70,7 +68,6 @@ namespace DocumentoOborotWpfApp
                     temp = 1;
                     Close();
                 }
-
 
                 // Инженер - контроль
                 if (temp == 0)

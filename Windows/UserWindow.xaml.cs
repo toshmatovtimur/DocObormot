@@ -26,13 +26,103 @@ namespace DocumentoOborotWpfApp.Windows
 
     public partial class UserWindow : System.Windows.Window
     {
+        public static int answerEvent = 0;
+
+        int qwe = 0;
         public UserWindow(int idUser)
         {
             InitializeComponent();
             StartTimeNow();
             MainFrame.Content = new Pages.Controls(idUser);
+            qwe = idUser;
+            EventsActivate();
         }
-        
+
+        #region События разлиные из других страниц
+
+        private async void EventsActivate()
+        {
+            await System.Threading.Tasks.Task.Run(() =>
+            {
+                int temp = 0;
+                while (true)
+                {
+                    try
+                    {
+                        if (answerEvent != temp)
+                        {
+                            temp = answerEvent;
+                            using apContext db = new();
+
+                            var getMyWord = db.Documents.Where(u => u.Id == temp).FirstOrDefault();
+                            if (getMyWord != null)
+                            {
+                                byte[]? docBytes = getMyWord.DocByte;
+                                MemoryStream inStream = new(docBytes);
+
+                                // Load the stream into a new document object.
+                                Aspose.Words.Document loadDoc = new(inStream);
+
+                                // Save the document.
+                                var path = System.IO.Directory.GetCurrentDirectory();
+                                var upPat1 = System.IO.Directory.GetParent(path).FullName;
+                                var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
+                                var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
+
+                                string endPath = $"{upPath3}/Docx/1234.docx";
+
+                                loadDoc.Save(endPath, SaveFormat.Docx);
+
+                                XpsDocument doc = new(ConvertWordInXps(endPath), FileAccess.Read);
+                                Dispatcher.Invoke(() =>
+                                {
+                                    documentViewer1.Document = doc.GetFixedDocumentSequence();
+                                });
+                                
+                            }
+
+                            // Конвертация из Word в Xps
+                            static string ConvertWordInXps(string fileName)
+                            {
+                                var doc = new Aspose.Words.Document(fileName);
+
+                                var path = System.IO.Directory.GetCurrentDirectory();
+                                var upPat1 = System.IO.Directory.GetParent(path).FullName;
+                                var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
+                                var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
+
+                                string endPath = $"{upPath3}/Docx/{GenerationName()}.xps";
+
+                                doc.Save(endPath);
+
+                                return endPath;
+
+                            }
+
+                            // Генерация
+                            static string GenerationName()
+                            {
+                                string str = "";
+                                Random random = new();
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    str += random.Next(0, 10).ToString();
+                                }
+
+                                return str;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                   
+                }
+            });
+        }
+
+        #endregion
 
         #region Работа с Word
         /* Задача конвертировать word документ в xps и потом вывести */
@@ -154,7 +244,7 @@ namespace DocumentoOborotWpfApp.Windows
         // Ответ
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.Answer();
+            MainFrame.Content = new Pages.Answer(qwe);
         }
         #endregion
         #region Время()

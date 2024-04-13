@@ -1,6 +1,9 @@
-﻿using DocumentoOborotWpfApp.Models;
+﻿using Aspose.Words;
+using DocumentoOborotWpfApp.Models;
+using DocumentoOborotWpfApp.Windows;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,19 +16,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Xps.Packaging;
 
 namespace DocumentoOborotWpfApp.Pages
 {
 
     public partial class Answer : Page
     {
-        public Answer()
+        int ansWer = 0;
+        public Answer(int idUser)
         {
             InitializeComponent();
-            StartSendsTable();
+            StartSendsTable(idUser);
+            ansWer = idUser;
         }
 
-        private void StartSendsTable()
+        private void StartSendsTable(int t)
         {
             using apContext db = new();
 
@@ -35,6 +41,7 @@ namespace DocumentoOborotWpfApp.Pages
                             join doc in db.Documents.ToList() on send.FkDoc equals doc.Id
                             join status in db.Sendstatuses.ToList() on send.FkStatus equals status.Id
                             join rol in db.Roles.ToList() on user1.FkRole equals rol.Id
+                            where user1.Id == t
                             select new
                             {
                                 send.Id,
@@ -51,9 +58,66 @@ namespace DocumentoOborotWpfApp.Pages
         // Обновить таблицу
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StartSendsTable();
+            StartSendsTable(ansWer);
         }
 
+        // Показать заметки
+        private void Zametki(object sender, MouseButtonEventArgs e)
+        {
+            using apContext db = new();
 
+            zametkaX.Text = "Заметок нет";
+            int t = ReturnId(listviewSends.SelectedValue.ToString());
+
+            var getZamechanie = db.Notifsends.Where(u => u.FkSend == t).FirstOrDefault();
+            if (getZamechanie != null)
+            {
+                zametkaX.Text = getZamechanie.Comments;
+            }
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+        }
+
+        // Просмотр документа
+        private void ViewDocumentAnswer(object sender, RoutedEventArgs e)
+        {
+            int t = ReturnId(listviewSends.SelectedValue.ToString());
+            
+            UserWindow.answerEvent = t;
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+        }
     }
 }

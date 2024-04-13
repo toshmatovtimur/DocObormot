@@ -199,7 +199,7 @@ namespace DocumentoOborotWpfApp.Windows
         private void OpenDocument(object sender, MouseButtonEventArgs e)
         {
             int t = ReturnId(listviewSends.SelectedValue.ToString());
-
+            documentViewer1.Document = null;
             using apContext db = new();
 
             var getMyWord = db.Documents.Where(u => u.Id == t).FirstOrDefault();
@@ -235,13 +235,25 @@ namespace DocumentoOborotWpfApp.Windows
                 var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
                 var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
 
-                string endPath = $"{upPath3}/Docx/1234.xps";
+                string endPath = $"{upPath3}/Docx/{GenerationName()}.xps";
 
                 doc.Save(endPath);
 
                 return endPath;
 
+            }
 
+            // Генерация
+            static string GenerationName()
+            {
+                string str = "";
+                Random random = new();
+                for (int i = 0; i < 10; i++)
+                {
+                    str += random.Next(0, 10).ToString();
+                }
+
+                return str;
             }
 
             // Возвращает Id

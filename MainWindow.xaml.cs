@@ -20,10 +20,10 @@ namespace DocumentoOborotWpfApp
         public MainWindow()
         {
             InitializeComponent();
-            //UserWindow table = new(6);
-            //table.Show();
-            AdminWindow admin = new();
-            admin.Show();
+            UserWindow table = new(6);
+            table.Show();
+            //AdminWindow adminWindow = new();
+            //adminWindow.Show();
             Close();
             //Start();
         }
@@ -81,7 +81,7 @@ namespace DocumentoOborotWpfApp
 
                     if(GetAdminLogPass != null)
                     {
-                         ControlUser control = new();
+                         ControlUser control = new(6);
                          control.Show();
                          temp = 1;
                          Close();

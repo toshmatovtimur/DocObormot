@@ -9,11 +9,64 @@
       Title="Ответ">
 
     <Grid>
-        <TextBlock 
-            TextWrapping="Wrap"
-            VerticalAlignment="Center"
-            Text="Здесь будет ответ ответ, переделать или нет, будет типо листвиев, со списком, то что одобрено, будет вылетать из списка"/>
-        <TextBlock Text="Все запросы"/>
-     
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Мои отправленные документы"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="30"
+                   FontStyle="Italic"/>
+
+        <Button Click="Button_Click"
+                HorizontalAlignment="Right"
+                Width="150"
+                Height="40" 
+                Content="Обновить"
+                FontSize="18"
+                Background="AliceBlue"/>
+
+        <ListView x:Name="listviewSends" 
+                  HorizontalAlignment="Left"  
+                  Grid.Row="1"
+                  Grid.RowSpan="4"
+                  Width="745"
+                  Margin="5" 
+                  VerticalAlignment="Stretch" 
+                  SelectionMode="Extended" 
+                  IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=otpravka, Mode=OneWay}" Header="Отправитель" Width="155"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=poluchatel, Mode=OneWay}" Header="Получатель" Width="155"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=document, Mode=OneWay}" Header="Документ" Width="170"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=stat, Mode=OneWay}" Header="Статус" Width="165"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Text="Замечания: "
+                   Grid.Row="5"
+                   VerticalAlignment="Center"
+                   FontSize="25"
+                   HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        <TextBox TextWrapping="Wrap"
+                 Width="450"
+                 Height="180"
+                 Grid.Row="5"
+                 Grid.RowSpan="4"
+                 IsReadOnly="True"
+                 VerticalAlignment="Top"
+                 FontSize="25"
+                 HorizontalAlignment="Right" Margin="0,0,4,0"/>
     </Grid>
 </Page>

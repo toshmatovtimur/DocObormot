@@ -62,7 +62,7 @@
                 Height="44" Width="205"
                 Click="Button_Click_3"/>
         <Button Grid.Column="4"
-                Content="Контроль" 
+                Content="Заполнить шаблон" 
                 Background="AliceBlue"
                 HorizontalAlignment="Center" 
                 Margin="0,24,0,0" 

@@ -4,12 +4,81 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentoOborotWpfApp"
-        mc:Ignorable="d"
-        Title="ControlUser" Height="450" Width="800">
+        mc:Ignorable="d" Height="700" Width="1350"
+        WindowStartupLocation="CenterScreen"
+        Icon="\Resources\1.png"
+        Title="Контроллер">
     <Grid>
-        <TextBlock Text="Контроль"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="35" Width="256"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DocumentViewer Grid.ColumnSpan="3"
+                        Grid.RowSpan="10"
+                        Margin="10"
+                        Background="White"
+                        Name="documentViewer1"/>
+
+        <Button Content="Open" 
+                Background="LightGreen"
+                Click="Button_Click"
+                Height="25"
+                Width="100"
+                Grid.Column="2"
+                VerticalAlignment="Top" 
+                Margin="56,10,69,0"/>
+
+        <!-- Страницы -->
+        <Frame Name="MainFrame" Padding="5" 
+               Grid.Column="3"
+               Grid.ColumnSpan="3"
+               Grid.Row="1"
+               Grid.RowSpan="10"
+               Background="AliceBlue" 
+               NavigationUIVisibility="Hidden" 
+               Margin="0,0,0,30"/>
+        <Button Grid.Column="3" 
+                Content="Директория" 
+                Background="White"
+                HorizontalAlignment="Center" 
+                Margin="0,24,0,0" 
+                VerticalAlignment="Top" 
+                Height="44" Width="205"
+                Click="Button_Click_3"/>
+        <Button Grid.Column="4"
+                Content="Контроль" 
+                Background="AliceBlue"
+                HorizontalAlignment="Center" 
+                Margin="0,24,0,0" 
+                VerticalAlignment="Top" 
+                Height="44" Width="205" 
+                Click="Button_Click_4"/>
+        <Button Grid.Column="5"
+                Content="Ответ" 
+                Background="LightBlue"
+                HorizontalAlignment="Center" 
+                Margin="0,24,0,0" 
+                VerticalAlignment="Top" 
+                Height="44" Width="205" 
+                Click="Button_Click_5" />
+        <!-- Страницы -->
+
     </Grid>
 </Window>

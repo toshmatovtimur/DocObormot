@@ -272,8 +272,6 @@ namespace DocumentoOborotWpfApp.Pages
                     try
                     {
                         db.Dirdocs.Remove(getDirFile);
-                        db.SaveChanges();
-
                         db.Documents.Remove(getDeleteFile);
                         db.SaveChanges();
 
@@ -309,6 +307,38 @@ namespace DocumentoOborotWpfApp.Pages
                     }
                 }
             }
+
+            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (Result == MessageBoxResult.Yes)
+            {
+                using apContext db = new();
+
+                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
+                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
+
+                if (getDeleteFile != null && getDirFile != null)
+                {
+                    try
+                    {
+                        db.Dirdocs.Remove(getDirFile);
+                        db.Documents.Remove(getDeleteFile);
+                        db.SaveChanges();
+
+                        StartDirectory();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+
+            }
+            else if (Result == MessageBoxResult.No)
+            {
+                return;
+            }
         }
 
         // док дел 3
@@ -326,6 +356,38 @@ namespace DocumentoOborotWpfApp.Pages
                         temp += match.Value[i];
                     }
                 }
+            }
+
+            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (Result == MessageBoxResult.Yes)
+            {
+                using apContext db = new();
+
+                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
+                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
+
+                if (getDeleteFile != null && getDirFile != null)
+                {
+                    try
+                    {
+                        db.Dirdocs.Remove(getDirFile);
+                        db.Documents.Remove(getDeleteFile);
+                        db.SaveChanges();
+
+                        StartDirectory();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+
+            }
+            else if (Result == MessageBoxResult.No)
+            {
+                return;
             }
         }
 
@@ -345,6 +407,38 @@ namespace DocumentoOborotWpfApp.Pages
                     }
                 }
             }
+
+            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (Result == MessageBoxResult.Yes)
+            {
+                using apContext db = new();
+
+                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
+                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
+
+                if (getDeleteFile != null && getDirFile != null)
+                {
+                    try
+                    {
+                        db.Dirdocs.Remove(getDirFile);
+                        db.Documents.Remove(getDeleteFile);
+                        db.SaveChanges();
+
+                        StartDirectory();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+
+            }
+            else if (Result == MessageBoxResult.No)
+            {
+                return;
+            }
         }
 
         // док дел 5
@@ -362,6 +456,38 @@ namespace DocumentoOborotWpfApp.Pages
                         temp += match.Value[i];
                     }
                 }
+            }
+
+            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (Result == MessageBoxResult.Yes)
+            {
+                using apContext db = new();
+
+                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
+                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
+
+                if (getDeleteFile != null && getDirFile != null)
+                {
+                    try
+                    {
+                        db.Dirdocs.Remove(getDirFile);
+                        db.Documents.Remove(getDeleteFile);
+                        db.SaveChanges();
+
+                        StartDirectory();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+
+            }
+            else if (Result == MessageBoxResult.No)
+            {
+                return;
             }
         }
 

@@ -25,7 +25,6 @@
                     <Setter Property="Padding" Value="3" />
                 </Style>
             </TabControl.Resources>
-
             <TabItem Header="ЭС4" Height="110" Width="30" >
                 <GroupBox Header="Внутриплощадочные сети" Margin="5" Padding="5">
                     <StackPanel>
@@ -36,10 +35,11 @@
                           Margin="5" 
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
-                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                          IsSynchronizedWithCurrentItem="True" >
                             <ListView.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Просмотреть документ" Click="ViewDoc1"/>
+                                    <MenuItem Header="Удалить документ" Click="DelDoc1"/>
                                 </ContextMenu>
                             </ListView.ContextMenu>
                             <ListView.View>
@@ -48,96 +48,137 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </StackPanel>    
-                   
+                        <Button Content="Добавить файл"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                FontSize="18"
+                                Background="AliceBlue" 
+                                Click="Button_Click"/>
+                    </StackPanel>
                 </GroupBox>
             </TabItem>
 
             <TabItem Header="СЗП" Height="110" Width="30">
                 <GroupBox Header="Средства защиты проезда" Margin="5" Padding="5">
-                    <ListView x:Name="listviewSZP" 
+                    <StackPanel>
+                        <ListView x:Name="listviewSZP" 
                           HorizontalAlignment="Stretch"  
                           Margin="5" 
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
-                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Просмотреть документ" Click="ViewDoc2"/>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                          IsSynchronizedWithCurrentItem="True">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Просмотреть документ" Click="ViewDoc2"/>
+                                    <MenuItem Header="Удалить документ" Click="DelDoc2" />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Добавить файл"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                FontSize="18"
+                                Background="AliceBlue" 
+                                Click="Button_Click_1"/>
+                    </StackPanel>
                 </GroupBox>
             </TabItem>
 
             <TabItem Header="ЭМ" Height="110" Width="30">
                 <GroupBox Header="Электрооборудование силовое" Margin="5" Padding="5">
-                    <ListView x:Name="listviewEM" 
+                    <StackPanel>
+                        <ListView x:Name="listviewEM" 
                           HorizontalAlignment="Stretch"  
                           Margin="5" 
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
-                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Просмотреть документ" Click="ViewDoc3"/>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                          IsSynchronizedWithCurrentItem="True">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Просмотреть документ" Click="ViewDoc3"/>
+                                    <MenuItem Header="Удалить документ" Click="DelDoc3" />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Добавить файл"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                FontSize="18"
+                                Background="AliceBlue" 
+                                Click="Button_Click_2"/>
+                    </StackPanel>
                 </GroupBox>
             </TabItem>
 
             <TabItem Header="ЭНО" Height="110" Width="30">
                 <GroupBox Header="Охранное освещение" Margin="5" Padding="5">
-                    <ListView x:Name="listviewENO" 
+                    <StackPanel>
+                        <ListView x:Name="listviewENO" 
                           HorizontalAlignment="Stretch"  
                           Margin="5" 
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
-                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Просмотреть документ" Click="ViewDoc4" />
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                          IsSynchronizedWithCurrentItem="True">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Просмотреть документ" Click="ViewDoc4" />
+                                    <MenuItem Header="Удалить документ" Click="DelDoc4" />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Добавить файл"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                FontSize="18"
+                                Background="AliceBlue" 
+                                Click="Button_Click_3"/>
+                    </StackPanel>
                 </GroupBox>
             </TabItem>
 
             <TabItem Header="ТСО" Height="110" Width="30">
                 <GroupBox Header="Технические средства охраны" Margin="5" Padding="5">
-                    <ListView x:Name="listviewTSO" 
+                    <StackPanel>
+                        <ListView x:Name="listviewTSO" 
                           HorizontalAlignment="Stretch"  
                           Margin="5" 
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
-                          IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Просмотреть документ" Click="ViewDoc5" />
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                          IsSynchronizedWithCurrentItem="True">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Просмотреть документ" Click="ViewDoc5" />
+                                    <MenuItem Header="Удалить документ" Click="DocDel5" />
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Добавить файл"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                FontSize="18"
+                                Background="AliceBlue" 
+                                Click="Button_Click_4"/>
+                    </StackPanel>
                 </GroupBox>
             </TabItem>
         </TabControl>

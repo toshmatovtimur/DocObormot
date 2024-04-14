@@ -38,7 +38,7 @@ namespace DocumentoOborotWpfApp.Windows
             EventsActivate();
         }
 
-        #region События разлиные из других страниц
+        #region События различные из других страниц
 
         private async void EventsActivate()
         {
@@ -200,9 +200,6 @@ namespace DocumentoOborotWpfApp.Windows
                 db.SaveChanges();
 
             }
-
-            MessageBox.Show("Проверь БД");
-
         }
 
         // Обратно из БД в Word файл

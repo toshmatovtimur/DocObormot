@@ -37,6 +37,11 @@
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
                           IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Просмотреть документ" Click="ViewDoc1"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
@@ -56,6 +61,11 @@
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
                           IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Просмотреть документ" Click="ViewDoc2"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
@@ -73,6 +83,11 @@
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
                           IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Просмотреть документ" Click="ViewDoc3"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
@@ -90,6 +105,11 @@
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
                           IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Просмотреть документ" Click="ViewDoc4" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
@@ -107,6 +127,11 @@
                           VerticalAlignment="Stretch" 
                           SelectionMode="Extended" 
                           IsSynchronizedWithCurrentItem="True" MouseDoubleClick="check">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Просмотреть документ" Click="ViewDoc5" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=NameDoc, Mode=OneWay}" Header="Наименование документа" Width="222"/>
@@ -115,7 +140,6 @@
                     </ListView>
                 </GroupBox>
             </TabItem>
-            
         </TabControl>
     </Grid>
 </Page>

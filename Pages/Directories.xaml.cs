@@ -1,4 +1,5 @@
 ﻿using DocumentoOborotWpfApp.Models;
+using DocumentoOborotWpfApp.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,136 @@ namespace DocumentoOborotWpfApp.Pages
         {
             var str = listviewVS.SelectedItem.ToString();
             MessageBox.Show(str);
+        }
+
+        // 1 папка
+        private void ViewDoc1(object sender, RoutedEventArgs e)
+        {
+            int t = ReturnId(listviewVS.SelectedValue.ToString());
+
+            UserWindow.answerEvent = t;
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+        }
+
+        // 2 папка
+        private void ViewDoc2(object sender, RoutedEventArgs e)
+        {
+            int t = ReturnId(listviewSZP.SelectedValue.ToString());
+
+            UserWindow.answerEvent = t;
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+        }
+
+        // 3 папка
+        private void ViewDoc3(object sender, RoutedEventArgs e)
+        {
+            int t = ReturnId(listviewEM.SelectedValue.ToString());
+
+            UserWindow.answerEvent = t;
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+        }
+
+        // 4 папка
+        private void ViewDoc4(object sender, RoutedEventArgs e)
+        {
+            int t = ReturnId(listviewENO.SelectedValue.ToString());
+
+            UserWindow.answerEvent = t;
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
+        }
+
+        // 5 папка
+        private void ViewDoc5(object sender, RoutedEventArgs e)
+        {
+            int t = ReturnId(listviewTSO.SelectedValue.ToString());
+
+            UserWindow.answerEvent = t;
+
+            // Возвращает Id
+            int ReturnId(string str)
+            {
+                var temp = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        temp += str[i];
+                    }
+                    if (str[i] == ',')
+                    {
+                        break;
+                    }
+                }
+                return Convert.ToInt32(temp);
+            }
         }
     }
 }

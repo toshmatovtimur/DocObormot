@@ -182,7 +182,8 @@
                 Width="180" 
                 Margin="136,40,0,2" 
                 Grid.RowSpan="2"
-                Background="LightGreen" Click="Button_Click_1"/>
+                Background="LightGreen" 
+                Click="Button_Click_1"/>
 
     </Grid>
 </Window>

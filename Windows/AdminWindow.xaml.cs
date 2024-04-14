@@ -275,5 +275,17 @@ namespace DocumentoOborotWpfApp.Windows
             }
 
         }
+
+        // Открыть документ через контекстное меню
+        private void ViewDocumentAnswer(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
+        // Выгрузить в Excel
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
     }
 }

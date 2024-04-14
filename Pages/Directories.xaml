@@ -28,8 +28,6 @@
             <TabItem Header="ЭС4" Height="110" Width="30" >
                 <GroupBox Header="Внутриплощадочные сети" Margin="5" Padding="5">
                     <StackPanel>
-                        <TextBox Text="asda"/>
-                        <TextBlock Text="asda"/>
                         <ListView x:Name="listviewVS" 
                           HorizontalAlignment="Stretch"  
                           Margin="5" 

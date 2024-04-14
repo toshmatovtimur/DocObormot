@@ -239,215 +239,49 @@ namespace DocumentoOborotWpfApp.Pages
             }
         }
         #endregion
-        #region Delete в работе
+        #region Delete
 
         // док дел 1
         private void DelDoc1(object sender, RoutedEventArgs e)
         {
             string input = listviewVS.SelectedValue.ToString();
-            string pattern = @"DocId = (\d+)";
-            string temp = "";
-            foreach (Match match in Regex.Matches(input, pattern).Cast<Match>())
-            {
-                for (int i = 0; i < match.Value.Length; i++)
-                {
-                    if (char.IsDigit(match.Value[i]))
-                    {
-                        temp += match.Value[i];
-                    }
-                }
-            }
-
-            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if(Result == MessageBoxResult.Yes)
-            {
-                using apContext db = new();
-
-                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
-                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
-
-                if (getDeleteFile != null && getDirFile != null)
-                {
-                    try
-                    {
-                        db.Dirdocs.Remove(getDirFile);
-                        db.Documents.Remove(getDeleteFile);
-                        db.SaveChanges();
-
-                        StartDirectory();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                   
-                }
-              
-            }
-            else if(Result == MessageBoxResult.No)
-            {
-                return;
-            }
+            DeleteDocInDir(input);
         }
 
         // док дел 2
         private void DelDoc2(object sender, RoutedEventArgs e)
         {
             string input = listviewSZP.SelectedValue.ToString();
-            string pattern = @"DocId = (\d+)";
-            string temp = "";
-            foreach (Match match in Regex.Matches(input, pattern).Cast<Match>())
-            {
-                for (int i = 0; i < match.Value.Length; i++)
-                {
-                    if (char.IsDigit(match.Value[i]))
-                    {
-                        temp += match.Value[i];
-                    }
-                }
-            }
-
-            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (Result == MessageBoxResult.Yes)
-            {
-                using apContext db = new();
-
-                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
-                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
-
-                if (getDeleteFile != null && getDirFile != null)
-                {
-                    try
-                    {
-                        db.Dirdocs.Remove(getDirFile);
-                        db.Documents.Remove(getDeleteFile);
-                        db.SaveChanges();
-
-                        StartDirectory();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
-                }
-
-            }
-            else if (Result == MessageBoxResult.No)
-            {
-                return;
-            }
+            DeleteDocInDir(input);
         }
 
         // док дел 3
         private void DelDoc3(object sender, RoutedEventArgs e)
         {
             string input = listviewEM.SelectedValue.ToString();
-            string pattern = @"DocId = (\d+)";
-            string temp = "";
-            foreach (Match match in Regex.Matches(input, pattern).Cast<Match>())
-            {
-                for (int i = 0; i < match.Value.Length; i++)
-                {
-                    if (char.IsDigit(match.Value[i]))
-                    {
-                        temp += match.Value[i];
-                    }
-                }
-            }
-
-            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (Result == MessageBoxResult.Yes)
-            {
-                using apContext db = new();
-
-                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
-                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
-
-                if (getDeleteFile != null && getDirFile != null)
-                {
-                    try
-                    {
-                        db.Dirdocs.Remove(getDirFile);
-                        db.Documents.Remove(getDeleteFile);
-                        db.SaveChanges();
-
-                        StartDirectory();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
-                }
-
-            }
-            else if (Result == MessageBoxResult.No)
-            {
-                return;
-            }
+            DeleteDocInDir(input);
         }
 
         // док дел 4
         private void DelDoc4(object sender, RoutedEventArgs e)
         {
             string input = listviewENO.SelectedValue.ToString();
-            string pattern = @"DocId = (\d+)";
-            string temp = "";
-            foreach (Match match in Regex.Matches(input, pattern).Cast<Match>())
-            {
-                for (int i = 0; i < match.Value.Length; i++)
-                {
-                    if (char.IsDigit(match.Value[i]))
-                    {
-                        temp += match.Value[i];
-                    }
-                }
-            }
-
-            var Result = MessageBox.Show("Вы уверены что хотите удалить файл??", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (Result == MessageBoxResult.Yes)
-            {
-                using apContext db = new();
-
-                var getDeleteFile = db.Documents.FirstOrDefault(u => u.Id == Convert.ToInt32(temp));
-                var getDirFile = db.Dirdocs.FirstOrDefault(u => u.FkDoc == Convert.ToInt32(temp));
-
-                if (getDeleteFile != null && getDirFile != null)
-                {
-                    try
-                    {
-                        db.Dirdocs.Remove(getDirFile);
-                        db.Documents.Remove(getDeleteFile);
-                        db.SaveChanges();
-
-                        StartDirectory();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
-                }
-
-            }
-            else if (Result == MessageBoxResult.No)
-            {
-                return;
-            }
+            DeleteDocInDir(input);
         }
 
         // док дел 5
         private void DocDel5(object sender, RoutedEventArgs e)
         {
-            string input = listviewTSO.SelectedValue.ToString();
+            string? input = listviewTSO.SelectedValue.ToString();
+            DeleteDocInDir(input);
+        }
+
+        // Метод удаления
+        private void DeleteDocInDir(string str)
+        {
             string pattern = @"DocId = (\d+)";
             string temp = "";
-            foreach (Match match in Regex.Matches(input, pattern).Cast<Match>())
+            foreach (Match match in Regex.Matches(str, pattern).Cast<Match>())
             {
                 for (int i = 0; i < match.Value.Length; i++)
                 {
@@ -492,7 +326,5 @@ namespace DocumentoOborotWpfApp.Pages
         }
 
         #endregion
-
-
     }
 }

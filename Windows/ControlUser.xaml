@@ -71,7 +71,7 @@
                 Height="44" Width="205" 
                 Click="Button_Click_4"/>
         <Button Grid.Column="5"
-                Content="Ответ" 
+                Content="Ответы" 
                 Background="LightBlue"
                 HorizontalAlignment="Center" 
                 Margin="0,24,0,0" 

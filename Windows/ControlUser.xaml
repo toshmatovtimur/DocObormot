@@ -62,22 +62,14 @@
                 VerticalAlignment="Top" 
                 Height="44" Width="205"
                 Click="Button_Click_3"/>
+        
         <Button Grid.Column="4"
-                Content="Контроль" 
-                Background="AliceBlue"
-                HorizontalAlignment="Center" 
-                Margin="0,24,0,0" 
-                VerticalAlignment="Top" 
-                Height="44" Width="205" 
-                Click="Button_Click_4"/>
-        <Button Grid.Column="5"
-                Content="Ответы" 
+                Content="Документы для проверки" 
                 Background="LightBlue"
                 HorizontalAlignment="Center" 
                 Margin="0,24,0,0" 
                 VerticalAlignment="Top" 
-                Height="44" Width="205" 
-                Click="Button_Click_5" />
+                Height="44" Width="205" Click="Button_Click_4"/>
         <!-- Страницы -->
 
     </Grid>

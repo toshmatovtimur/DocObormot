@@ -21,20 +21,107 @@ using System.Windows.Xps.Packaging;
 
 namespace DocumentoOborotWpfApp.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для ControlUser.xaml
-    /// </summary>
+
     public partial class ControlUser : Window
     {
         int idControl = 0;
+
+        public static int docdirEvent = 0;
+
         public ControlUser(int idUser)
         {
             InitializeComponent();
             StartTimeNow();
-            MainFrame.Content = new Pages.Controls(idUser);
             idControl = idUser;
-
+            MainFrame.Content = new Pages.DocControl(4);
+            EventsActivate();
         }
+
+        #region События различные из других страниц
+
+        private async void EventsActivate()
+        {
+            await Task.Run(() =>
+            {
+                int temp = 0;
+                while (true)
+                {
+                    try
+                    {
+                        if (docdirEvent != temp)
+                        {
+                            temp = docdirEvent;
+                            using apContext db = new();
+
+                            var getMyWord = db.Documents.Where(u => u.Id == temp).FirstOrDefault();
+                            if (getMyWord != null)
+                            {
+                                byte[]? docBytes = getMyWord.DocByte;
+                                MemoryStream inStream = new(docBytes);
+
+                                // Load the stream into a new document object.
+                                Aspose.Words.Document loadDoc = new(inStream);
+
+                                // Save the document.
+                                var path = System.IO.Directory.GetCurrentDirectory();
+                                var upPat1 = System.IO.Directory.GetParent(path).FullName;
+                                var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
+                                var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
+
+                                string endPath = $"{upPath3}/Docx/1234.docx";
+
+                                loadDoc.Save(endPath, SaveFormat.Docx);
+
+                                XpsDocument doc = new(ConvertWordInXps(endPath), FileAccess.Read);
+                                Dispatcher.Invoke(() =>
+                                {
+                                    documentViewer1.Document = doc.GetFixedDocumentSequence();
+                                });
+
+                            }
+
+                            // Конвертация из Word в Xps
+                            static string ConvertWordInXps(string fileName)
+                            {
+                                var doc = new Aspose.Words.Document(fileName);
+
+                                var path = System.IO.Directory.GetCurrentDirectory();
+                                var upPat1 = System.IO.Directory.GetParent(path).FullName;
+                                var upPath2 = System.IO.Directory.GetParent(upPat1).FullName;
+                                var upPath3 = System.IO.Directory.GetParent(upPath2).FullName;
+
+                                string endPath = $"{upPath3}/Docx/{GenerationName()}.xps";
+
+                                doc.Save(endPath);
+
+                                return endPath;
+
+                            }
+
+                            // Генерация
+                            static string GenerationName()
+                            {
+                                string str = "";
+                                Random random = new();
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    str += random.Next(0, 10).ToString();
+                                }
+
+                                return str;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+            });
+        }
+
+        #endregion
         #region Работа с Word
         /* Задача конвертировать word документ в xps и потом вывести */
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -146,17 +233,12 @@ namespace DocumentoOborotWpfApp.Windows
             MainFrame.Content = new Pages.Directories();
         }
 
-        // Контроль
+        // Документы для проверки
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.Controls(6);
+            MainFrame.Content = new Pages.DocControl(3);
         }
 
-        // Ответ
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new Pages.Answer(idControl);
-        }
         #endregion
         #region Время()
         void StartTimeNow()
@@ -169,7 +251,7 @@ namespace DocumentoOborotWpfApp.Windows
 
         void Timer_Tick(object sender, EventArgs e)
         {
-            Title = "БЕЗ РИСКА. Инженер. Томское время: " + DateTime.Now.ToLongTimeString();
+            Title = "БЕЗ РИСКА. Контроллер. Томское время: " + DateTime.Now.ToLongTimeString();
         }
 
 

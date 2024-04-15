@@ -257,9 +257,6 @@ namespace DocumentoOborotWpfApp.Windows
         {
              Title = "БЕЗ РИСКА. Инженер. Томское время: " + DateTime.Now.ToLongTimeString();
         }
-
-
-
         #endregion
     }
 }

@@ -64,4 +64,10 @@
     <Folder Include="Docx\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Pages\DocControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

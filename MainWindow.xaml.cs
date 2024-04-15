@@ -20,7 +20,7 @@ namespace DocumentoOborotWpfApp
         public MainWindow()
         {
             InitializeComponent();
-            UserWindow table = new(6);
+            ControlUser table = new(4);
             table.Show();
             //AdminWindow adminWindow = new();
             //adminWindow.Show();

@@ -83,7 +83,7 @@ namespace DocumentoOborotWpfApp.Pages
                     }
                 }
             }
-
+            ControlUser.docdirEvent = Convert.ToInt32(temp);
             UserWindow.answerEvent = Convert.ToInt32(temp);
         }
 
@@ -105,6 +105,7 @@ namespace DocumentoOborotWpfApp.Pages
             }
 
             UserWindow.answerEvent = Convert.ToInt32(temp);
+            ControlUser.docdirEvent = Convert.ToInt32(temp);
         }
 
         // 3 папка
@@ -125,6 +126,7 @@ namespace DocumentoOborotWpfApp.Pages
             }
 
             UserWindow.answerEvent = Convert.ToInt32(temp);
+            ControlUser.docdirEvent = Convert.ToInt32(temp);
         }
 
         // 4 папка
@@ -145,6 +147,7 @@ namespace DocumentoOborotWpfApp.Pages
             }
 
             UserWindow.answerEvent = Convert.ToInt32(temp);
+            ControlUser.docdirEvent = Convert.ToInt32(temp);
         }
 
         // 5 папка
@@ -165,6 +168,7 @@ namespace DocumentoOborotWpfApp.Pages
             }
 
             UserWindow.answerEvent = Convert.ToInt32(temp);
+            ControlUser.docdirEvent = Convert.ToInt32(temp);
 
         }
         #endregion

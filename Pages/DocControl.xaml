@@ -82,7 +82,36 @@
                 Background="AliceBlue"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
-                Padding="7" Margin="360,0,0,0" Click="Button_Click_1" />
+                Padding="7" 
+                Margin="360,0,0,0"
+                Click="Button_Click_1" />
+
+        <TextBlock Text="Замечания:"
+                   Grid.Row="7"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   FontSize="20"/>
+
+        <TextBox  Grid.Row="7"
+                  x:Name="zamechanieX"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  TextWrapping="Wrap"
+                  FontSize="18"
+                  Width="300"
+                  Height="100"
+                  Grid.RowSpan="2" 
+                  Margin="115,0,0,0"/>
+
+        <Button Content="Отправить на доработку"
+                Grid.Row="6"
+                HorizontalAlignment="Left"
+                Width="210"
+                Height="40"
+                Background="AliceBlue"
+                FontSize="18" 
+                Margin="434,49,0,11" 
+                Click="Button_Click_2" Grid.RowSpan="2"/>
 
     </Grid>
 </Page>

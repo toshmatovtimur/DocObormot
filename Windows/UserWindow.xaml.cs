@@ -123,7 +123,6 @@ namespace DocumentoOborotWpfApp.Windows
         }
 
         #endregion
-
         #region Работа с Word
         /* Задача конвертировать word документ в xps и потом вывести */
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -235,7 +234,7 @@ namespace DocumentoOborotWpfApp.Windows
         // Контроль
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.Controls(6);
+            MainFrame.Content = new Pages.Controls(qwe);
         }
 
         // Ответ

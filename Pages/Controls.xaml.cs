@@ -24,8 +24,6 @@ namespace DocumentoOborotWpfApp.Pages
     public partial class Controls : Page
     {
         readonly int idInzhener = 0;
-        
-
 
         public Controls(int idUser)
         {

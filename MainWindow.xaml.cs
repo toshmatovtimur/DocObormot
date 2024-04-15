@@ -20,12 +20,7 @@ namespace DocumentoOborotWpfApp
         public MainWindow()
         {
             InitializeComponent();
-            ControlUser table = new(4);
-            table.Show();
-            //AdminWindow adminWindow = new();
-            //adminWindow.Show();
-            Close();
-            //Start();
+            Start();
         }
 
         //Войти
@@ -62,8 +57,7 @@ namespace DocumentoOborotWpfApp
 
                 if (GetUserLogPass != null)
                 {
-                    //UserWindow table = new(GetUserLogPass.Id);
-                    UserWindow table = new(6);
+                    UserWindow table = new(GetUserLogPass.Id);
                     table.Show();
                     temp = 1;
                     Close();
@@ -78,7 +72,7 @@ namespace DocumentoOborotWpfApp
 
                     if(GetAdminLogPass != null)
                     {
-                         ControlUser control = new(6);
+                         ControlUser control = new(GetAdminLogPass.Id);
                          control.Show();
                          temp = 1;
                          Close();

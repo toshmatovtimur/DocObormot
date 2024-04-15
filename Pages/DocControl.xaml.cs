@@ -24,13 +24,13 @@ namespace DocumentoOborotWpfApp.Pages
 
     public partial class DocControl : Page
     {
-        int ansWer = 0;
         int idSend = 0;
+        int idController = 0;
         public DocControl(int idUser)
         {
             InitializeComponent();
-            StartSendsTable(4);
-            ansWer = idUser;
+            StartSendsTable(idUser);
+            idController = idUser;
         }
 
         private void StartSendsTable(int t)
@@ -43,7 +43,7 @@ namespace DocumentoOborotWpfApp.Pages
                             join doc in db.Documents.ToList() on send.FkDoc equals doc.Id
                             join status in db.Sendstatuses.ToList() on send.FkStatus equals status.Id
                             join rol in db.Roles.ToList() on user1.FkRole equals rol.Id
-                            where user2.Id == 4
+                            where user2.Id == t
                             select new
                             {
                                 docId = doc.Id,
@@ -60,7 +60,7 @@ namespace DocumentoOborotWpfApp.Pages
         // Обновить таблицу
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StartSendsTable(ansWer);
+            StartSendsTable(idController);
         }
 
         // Просмотр документа
@@ -102,22 +102,8 @@ namespace DocumentoOborotWpfApp.Pages
                 getSend.FkStatus = 2;
                 db.SaveChanges();
 
-                StartSendsTable(4);
+                StartSendsTable(idController);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             // Возвращает Id
             int ReturnId(string str)
@@ -152,9 +138,44 @@ namespace DocumentoOborotWpfApp.Pages
                 {
                     updateSend.FkStatus = 3;
                     db.SaveChanges();
-                    StartSendsTable(4);
+                    StartSendsTable(idController);
                     MessageBox.Show("Документ утвержден");
                 }
+            }
+            else if (Result == MessageBoxResult.No)
+            {
+                return;
+            }
+        }
+
+        // Отправить на доработку
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var Result = MessageBox.Show("Отправить на доработку?", "Требуется подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (Result == MessageBoxResult.Yes)
+            {
+                using apContext db = new();
+
+                var updateSend = db.Sendings.FirstOrDefault(u => u.Id == idSend);
+
+                Notifsend notifsend = new();
+                notifsend.FkRecUser = updateSend.FkRecUser; // Получатель который отправляет отправителю
+                notifsend.FkSendUser= updateSend.FkSendUser; // отправитель
+                notifsend.FkSend = updateSend.Id; // Отправление
+                notifsend.Active = true;
+                notifsend.FkStatusNotif = 1; // Активный
+                notifsend.Comments = zamechanieX.Text;
+                db.Notifsends.Add(notifsend);
+                db.SaveChanges();
+
+                if (updateSend != null)
+                {
+                    updateSend.FkStatus = 4;
+                    db.SaveChanges();
+                }
+                StartSendsTable(idController);
+                MessageBox.Show("Документ отправлен на доработку");
             }
             else if (Result == MessageBoxResult.No)
             {

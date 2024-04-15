@@ -33,7 +33,7 @@ namespace DocumentoOborotWpfApp.Windows
             InitializeComponent();
             StartTimeNow();
             idControl = idUser;
-            MainFrame.Content = new Pages.DocControl(4);
+            MainFrame.Content = new Pages.DocControl(idUser);
             EventsActivate();
         }
 
@@ -236,7 +236,7 @@ namespace DocumentoOborotWpfApp.Windows
         // Документы для проверки
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.DocControl(3);
+            MainFrame.Content = new Pages.DocControl(idControl);
         }
 
         #endregion
